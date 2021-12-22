@@ -9,6 +9,8 @@ import { Timestamp } from './utils/scalars/timestamp.scalar';
 import LogsMiddleware from './utils/logs.middleware';
 import { LoggerModule } from './logger/logger.module';
 import {DosAttackModule} from "./dosAttack/dosAttack.module";
+import {ServeStaticModule} from "@nestjs/serve-static";
+import {join} from "path";
 
 @Module({
   imports: [
@@ -22,6 +24,9 @@ import {DosAttackModule} from "./dosAttack/dosAttack.module";
         PORT: Joi.number(),
         FRONTEND_URL: Joi.string()
       })
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..',),
     }),
     DatabaseModule,
     DosAttackModule,

@@ -41,6 +41,7 @@
     "@nestjs/platform-express": "^8.0.9",
     "@nestjs/platform-socket.io": "^8.0.9",
     "@nestjs/schedule": "^1.0.1",
+    "@nestjs/serve-static": "^2.2.2",
     "@nestjs/terminus": "^8.0.1",
     "@nestjs/typeorm": "^8.0.2",
     "@nestjs/websockets": "^8.0.9",
