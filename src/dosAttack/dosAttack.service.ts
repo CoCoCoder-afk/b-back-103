@@ -16,7 +16,7 @@ export class DosAttackService {
     const promises = [];
     for (let i = 0; i  < amount; i++) {
       try {
-        promises.push(this.http.post(url, {
+        promises.push(this.http.post(url, {}, {
           headers: {
             ...requestHeaders
           }
