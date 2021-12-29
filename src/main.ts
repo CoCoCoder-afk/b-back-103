@@ -1,4 +1,4 @@
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import CustomLogger from './logger/customLogger';
 import * as fs from "fs";
 import * as path from "path";
-import { AllExceptionsFilter } from './all.exception.filter';
+import CustomExceptionFilter from './filters/customExceptionFilter';
 
 async function bootstrap() {
   const httpsOptions = process.env.NODE_ENV === 'production' ? {
@@ -18,8 +18,7 @@ async function bootstrap() {
       httpsOptions
     });
 
-  const { httpAdapter } = app.get(HttpAdapterHost);
-  app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
+  app.useGlobalFilters(new CustomExceptionFilter());
   app.useLogger(app.get(CustomLogger));
   app.useGlobalPipes(new ValidationPipe({
     transform: true
