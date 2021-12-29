@@ -25,9 +25,6 @@ import {join} from "path";
         FRONTEND_URL: Joi.string()
       })
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..',),
-    }),
     DatabaseModule,
     DosAttackModule,
     AuthenticationModule,
