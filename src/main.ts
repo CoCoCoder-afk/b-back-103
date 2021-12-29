@@ -10,17 +10,12 @@ import { AllExceptionsFilter } from './all.exception.filter';
 
 async function bootstrap() {
   const httpsOptions = process.env.NODE_ENV === 'production' ? {
-    key: fs.readFileSync(path.resolve(__dirname + './../secrets/privatekey.key')),
-    cert: fs.readFileSync(path.resolve(__dirname + './../secrets/certificate.crt'))
+    key: fs.readFileSync(path.resolve('/etc/letsencrypt/live/binbackbot.ru/privkey.pem')),
+    cert: fs.readFileSync(path.resolve('/etc/letsencrypt/live/binbackbot.ru/fullchain.pem'))
   } : {};
-  const app = process.env.NODE_ENV === 'production' ?
-    await NestFactory.create(AppModule, {
+  const app = await NestFactory.create(AppModule, {
       bufferLogs: true,
       httpsOptions
-    })
-    :
-    await NestFactory.create(AppModule, {
-      bufferLogs: true,
     });
 
   const { httpAdapter } = app.get(HttpAdapterHost);
